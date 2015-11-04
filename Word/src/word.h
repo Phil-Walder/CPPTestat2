@@ -24,4 +24,7 @@ public:
 
 };
 
+std::ostream& operator<<(std::ostream &out, Word const &word);
+std::istream& operator>>(std::istream &in, Word &word);
+
 #endif /* SRC_WORD_H_ */

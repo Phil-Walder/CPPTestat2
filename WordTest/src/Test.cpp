@@ -1,12 +1,11 @@
 #include "cute.h"
-#include "Word.h"
+#include "src/word.h"
 #include "ide_listener.h"
 #include "xml_listener.h"
 #include "cute_runner.h"
 
 void test_stream_input() {
 	std::istringstream input{"Word is the word!"};
-	std::ostream &out;
 
 }
 
