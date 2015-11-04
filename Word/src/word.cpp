@@ -9,7 +9,7 @@ std::string Word::lowerWord() const {
 	return ret;
 }
 
-void const Word::print(std::ostream &out) {
+void Word::print(std::ostream &out) const {
 	out << word;
 }
 
@@ -30,4 +30,9 @@ void Word::read(std::istream &in) {
 std::ostream& operator<<(std::ostream &out, Word const &word){
 	word.print(out);
 	return out;
+}
+
+std::istream& operator>>(std::istream &in, Word &word){
+	word.read(in);
+	return in;
 }
