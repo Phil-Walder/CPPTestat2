@@ -1,5 +1,5 @@
 #include "cute.h"
-#include "Word.h"
+#include "src/word.h"
 #include "ide_listener.h"
 #include "xml_listener.h"
 #include "cute_runner.h"
