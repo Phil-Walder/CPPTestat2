@@ -30,4 +30,5 @@
 #Eclipse
 .settings
 .cproject
+.mk
 
