@@ -21,8 +21,10 @@ void Word::read(std::istream &in) {
 		if (std::isalpha(input)) {
 			tempWord += input;
 		} else if (input == ' ') {
-			word = tempWord;
-			break;
+			if(!(tempWord == "")){
+				word = tempWord;
+				break;
+			}
 		}
 	}
 }
