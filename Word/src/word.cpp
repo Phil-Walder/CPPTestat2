@@ -6,7 +6,3 @@ std::string Word::lowerWord() const{
 	return ret;
 }
 
-
-bool Word::operator<(Word const& rhs) const{
-	return lowerWord() < rhs.lowerWord();
-}

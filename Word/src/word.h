@@ -12,7 +12,9 @@ class Word{
 public:
 	std::string lowerWord() const;
 
-	bool operator <(Word const& rhs) const;
+	inline bool operator<(Word const& rhs) const {
+		return lowerWord() < rhs.lowerWord();
+	};
 	inline bool operator>(Word const& rhs){ return (rhs < *this); }
 	inline bool operator>=(Word const& rhs){ return !(*this < rhs); }
 	inline bool operator<=(Word const& rhs){ return !(rhs < *this); }
