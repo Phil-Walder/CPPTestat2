@@ -21,8 +21,8 @@ public:
 	inline bool operator==(Word const& rhs){ return !(*this < rhs) && !(rhs < *this); }
 	inline bool operator!=(Word const& rhs){ return !(*this == rhs); }
 
-	void print(std::ostream &out) const;
-	void read(std::istream &in);
+	std::ostream& print(std::ostream &out) const;
+	std::istream& read(std::istream &in);
 
 };
 

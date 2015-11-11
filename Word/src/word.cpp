@@ -9,32 +9,37 @@ std::string Word::lowerWord() const {
 	return ret;
 }
 
-void Word::print(std::ostream &out) const {
+std::ostream& Word::print(std::ostream &out) const {
 	out << word;
+	return out;
 }
 
-void Word::read(std::istream &in) {
+std::istream& Word::read(std::istream &in) {
 	char input;
 	std::string tempWord;
-	while (!in.eof() && in.good()) {
-		in >> input;
-		if (std::isalpha(input)) {
-			tempWord += input;
-		} else if (input == ' ') {
+	while (in.good()) {
+		char peek = in.peek();
+		if (peek == EOF ||
+			peek == ' ' ||
+			!std::isalpha(peek)
+		) {
 			if(!(tempWord == "")){
 				word = tempWord;
 				break;
 			}
 		}
+		in >> input;
+		if (std::isalpha(input)) {
+			tempWord += input;
+		}
 	}
+	return in;
 }
 
 std::ostream& operator<<(std::ostream &out, Word const &word){
-	word.print(out);
-	return out;
+	return word.print(out);
 }
 
 std::istream& operator>>(std::istream &in, Word &word){
-	word.read(in);
-	return in;
+	return word.read(in);
 }
