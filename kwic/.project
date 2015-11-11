@@ -3,6 +3,7 @@
 	<name>kwic</name>
 	<comment></comment>
 	<projects>
+		<project>Word</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
