@@ -15,22 +15,18 @@ std::ostream& Word::print(std::ostream &out) const {
 }
 
 std::istream& Word::read(std::istream &in) {
-	char input;
 	std::string tempWord;
 	while (in.good()) {
 		char peek = in.peek();
-		if (peek == EOF ||
-			peek == ' ' ||
-			!std::isalpha(peek)
-		) {
+		if (!std::isalpha(peek)) {
 			if(!(tempWord == "")){
 				word = tempWord;
 				break;
 			}
 		}
-		in >> input;
-		if (std::isalpha(input)) {
-			tempWord += input;
+		in >> peek;
+		if(std::isalpha(peek)){
+			tempWord += peek;
 		}
 	}
 	return in;
