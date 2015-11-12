@@ -12,6 +12,9 @@ class Word{
 public:
 	std::string lowerWord() const;
 
+	Word(std::string word):word{word}{};
+	Word (){};
+
 	inline bool operator<(Word const& rhs) const {
 		return lowerWord() < rhs.lowerWord();
 	};

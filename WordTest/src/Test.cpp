@@ -1,11 +1,13 @@
 #include "cute.h"
 #include "src/word.h"
+#include "src/kwic.h"
 #include "ide_listener.h"
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <sstream>
 
 
 void test_stream_input() {
@@ -23,10 +25,46 @@ void test_stream_input() {
 
 }
 
+void test_read(){
+	std::istringstream input{"lala 5ack 4b!\nlala 5ack 4b!"};
+	std::vector<std::vector<Word>> output{};
+	Word lala{"lala"};
+	Word ack{"ack"};
+	Word b{"b"};
+	std::vector<std::vector<Word>> expected{{lala, ack, b},{lala, ack, b}};
+
+	output=read(input);
+
+	ASSERT_EQUAL(expected, output);
+}
+void test_read_emptyInput(){
+	std::istringstream input{""};
+	std::vector<std::vector<Word>> output{};
+	std::vector<std::vector<Word>> expected{{}};
+
+	output=read(input);
+
+	ASSERT_EQUAL(expected, output);
+}
+void test_write(){
+
+}
+void test_write_emptyOutput(){
+
+}
+void test_kwic(){
+
+}
+
 void runAllTests(int argc, char const *argv[]){
 	cute::suite s;
 
 	s.push_back(CUTE(test_stream_input));
+	s.push_back(CUTE(test_read));
+	s.push_back(CUTE(test_read_emptyInput));
+	s.push_back(CUTE(test_write));
+	s.push_back(CUTE(test_write_emptyOutput));
+	s.push_back(CUTE(test_kwic));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

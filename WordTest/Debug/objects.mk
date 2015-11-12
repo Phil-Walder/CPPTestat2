@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lWord
+LIBS := -lkwic -lWord
 
