@@ -9,7 +9,7 @@
 #define KWIC_H_
 #include <iosfwd>
 
-kwic(std::istream &in, std::ostream &out);
+void kwic(std::istream &in, std::ostream &out);
 
 
 #endif /* KWIC_H_ */

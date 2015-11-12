@@ -11,17 +11,7 @@
 #include <string>
 #include <algorithm>
 #include <sstream>
-
-void kwic(std::istream &in, std::ostream &out){
-	std::vector<std::vector<Word>> linesOfWords{};
-	linesOfWords=read(in);
-
-	for_each(begin(linesOfWords), end(linesOfWords), [&](auto line){
-
-	});
-}
-
-
+#include <iterator>
 
 std::vector<std::vector<Word>> read (std::istream &in){
 	std::vector<std::vector<Word>> linesOfWords;
@@ -40,3 +30,23 @@ std::vector<std::vector<Word>> read (std::istream &in){
 		return linesOfWords;
 }
 
+void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
+	std::vector<std::vector<Word>> result {};
+
+	std::ostream_iterator<Word> const output(out, "\n");
+
+	for_each(begin(linesOfWords), end(linesOfWords), [&](std::vector<Word> line){
+		for(unsigned int i=0;i<line.size();i++){
+			std::rotate_copy(line.begin(),line.begin()+1,line.end(),output);
+		}
+	});
+}
+
+
+void kwic(std::istream &in, std::ostream &out){
+	std::vector<std::vector<Word>> linesOfWords{};
+
+	linesOfWords=read(in);
+
+	write(linesOfWords, out);
+}
