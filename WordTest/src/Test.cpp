@@ -47,13 +47,33 @@ void test_read_emptyInput(){
 	ASSERT_EQUAL(expected, output);
 }
 void test_write(){
+	Word autpot{"autpot"};
+	Word la{"la"};
+	Word ack{"ack"};
+	std::vector<std::vector<Word>> input{{autpot, la},{ack}};
+	std::ostringstream out{};
 
+	write(input, out);
+
+	ASSERT_EQUAL(std::string{"autpot, la, ack"}, out.str());
 }
 void test_write_emptyOutput(){
+	Word noInput{""};
+	Word whitespace{" "};
+	std::vector<std::vector<Word>> input{{noInput},{whitespace}};
+	std::ostringstream out{};
 
+	write(input, out);
+
+	ASSERT_EQUAL(std::string{}, out.str());
 }
 void test_kwic(){
+	std::istringstream input{"lol. haha3"};
+	std::ostringstream out{};
 
+	kwic(input, out);
+
+	ASSERT_EQUAL(std::string{"lol, haha"}, out.str());
 }
 
 void runAllTests(int argc, char const *argv[]){

@@ -31,8 +31,6 @@ std::vector<std::vector<Word>> read (std::istream &in){
 }
 
 void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
-	std::vector<std::vector<Word>> result {};
-
 	std::ostream_iterator<Word> const output(out, "\n");
 
 	for_each(begin(linesOfWords), end(linesOfWords), [&](std::vector<Word> line){
@@ -41,7 +39,6 @@ void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
 		}
 	});
 }
-
 
 void kwic(std::istream &in, std::ostream &out){
 	std::vector<std::vector<Word>> linesOfWords{};
