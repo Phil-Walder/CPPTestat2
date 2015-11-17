@@ -14,17 +14,23 @@ void test_stream_input() {
 	std::istringstream input{"compl33tely ~ weird !!??!! 4matted in_put"};
 	Word word{};
 	std::ostringstream out{};
-
 	while(!input.eof()){
+		input >> word;
+		out << word <<", ";
+	}
+	ASSERT_EQUAL(std::string{"compl, tely, weird, matted, in, put, "}, out.str());
+}
+void test_2timesInput(){
+	std::istringstream input{"compl"};
+	Word word{};
+	std::ostringstream out{};
+	while(!input.eof()){
+		input >> word;
 		input >> word;
 		out << "," << word;
 	}
-
-	ASSERT_EQUAL(std::string{",compl,tely,weird,matted,in,put"}, out.str());
-
-
+	ASSERT_EQUAL(std::string{"compl, "}, out.str());
 }
-
 void test_read(){
 	std::istringstream input{"lala 5ack 4b!\nlala 5ack 4b!"};
 	std::vector<std::vector<Word>> output{};
@@ -32,18 +38,14 @@ void test_read(){
 	Word ack{"ack"};
 	Word b{"b"};
 	std::vector<std::vector<Word>> expected{{lala, ack, b},{lala, ack, b}};
-
 	output=read(input);
-
 	ASSERT_EQUAL(expected, output);
 }
 void test_read_emptyInput(){
 	std::istringstream input{""};
 	std::vector<std::vector<Word>> output{};
 	std::vector<std::vector<Word>> expected{{}};
-
 	output=read(input);
-
 	ASSERT_EQUAL(expected, output);
 }
 void test_write(){
@@ -52,9 +54,7 @@ void test_write(){
 	Word ack{"ack"};
 	std::vector<std::vector<Word>> input{{autpot, la},{ack}};
 	std::ostringstream out{};
-
 	write(input, out);
-
 	ASSERT_EQUAL(std::string{"autpot, la, ack"}, out.str());
 }
 void test_write_emptyOutput(){
@@ -62,17 +62,28 @@ void test_write_emptyOutput(){
 	Word whitespace{" "};
 	std::vector<std::vector<Word>> input{{noInput},{whitespace}};
 	std::ostringstream out{};
-
 	write(input, out);
-
 	ASSERT_EQUAL(std::string{}, out.str());
+}
+void test_sort(){
+	Word a{"a"};
+	Word b{"b"};
+	Word c{"c"};
+	std::vector<std::vector<Word>> input {{b, c},{a}};
+	std::vector<std::vector<Word>> output {};
+	output=sort(input);
+	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output});
+}
+void test_sort_emptyInput(){
+	std::vector<std::vector<Word>> input {};
+	std::vector<std::vector<Word>> output {};
+	output=sort(input);
+	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output});
 }
 void test_kwic(){
 	std::istringstream input{"lol. haha3"};
 	std::ostringstream out{};
-
 	kwic(input, out);
-
 	ASSERT_EQUAL(std::string{"lol, haha"}, out.str());
 }
 
@@ -80,6 +91,7 @@ void runAllTests(int argc, char const *argv[]){
 	cute::suite s;
 
 	s.push_back(CUTE(test_stream_input));
+	s.push_back(CUTE(test_2timesInput));
 	s.push_back(CUTE(test_read));
 	s.push_back(CUTE(test_read_emptyInput));
 	s.push_back(CUTE(test_write));
