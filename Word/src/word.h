@@ -13,11 +13,11 @@ public:
 	std::string lowerWord() const;
 
 	Word(std::string input){
-		if(std::find_if(input.begin(), input.end(),
-                [](char c) { return !std::isalpha(c); }) != input.end()){
+		if(std::all_of(input.begin(), input.end(), ::isalpha)){
+			word = input;
+		}else{
 			throw std::invalid_argument{"constructor called with non-alpha characters"};
 		}
-		word = input;
 	}
 
 	Word (){};

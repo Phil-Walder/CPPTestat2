@@ -1,6 +1,7 @@
 #include "word.h"
 
 #include <iostream>
+#include <algorithm>
 #include <string>
 
 std::string Word::lowerWord() const {

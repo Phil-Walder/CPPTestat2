@@ -21,24 +21,19 @@ std::vector<std::vector<Word>> read (std::istream &in){
 	while(std::getline(in, line, '\n')){
 		if(line=="break"){break;}
 
-		std::vector<Word> wordLine{};
-		std::istringstream str{line};
-		while(str.good()){
-			Word word{};
-			str>>word;
-			if(word.lowerWord().length() > 0){
-				wordLine.push_back(word);
-			}
-		}
+		std::istream_iterator<Word> initer{line};
+		std::istream_iterator<Word> eof{};
+		std::vector<Word> wordLine{initer, eof};
+
 		linesOfWords.push_back(wordLine);
 	}
 	return linesOfWords;
 }
-
-std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted){
+//set / multiset
+std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted) const {
 	std::vector<std::vector<Word>> sorted{};
 	for_each(unsorted.begin(), unsorted.end(),
-		[&](std::vector<Word> line){
+		[&sorted](std::vector<Word> line){
 			std::sort(line.begin(), line.end());
 			sorted.push_back(line);
 		}
