@@ -59,20 +59,15 @@ void test_write(){
 	std::vector<std::vector<Word>> input{{autpot, la},{ack}};
 	std::ostringstream out{};
 	write(input, out);
-	ASSERT_EQUAL(std::string{"la\n"
-							 "autpot\n"
-							 "autpot\n"
+	ASSERT_EQUAL(std::string{"autpot\n"
 							 "la\n"
+							 "la\n"
+							 "autpot\n"
 							 "ack\n"}, out.str());
 }
 
-void test_write_emptyOutput(){
-	Word noInput{""};
-	Word whitespace{" "};
-	std::vector<std::vector<Word>> input{{noInput},{whitespace}};
-	std::ostringstream out{};
-	write(input, out);
-	ASSERT_EQUAL(std::string{}, out.str());
+void test_errorConstruction(){
+	ASSERT_THROWS(Word whitespace{" "}, std::invalid_argument);
 }
 
 void test_sort(){
@@ -96,10 +91,12 @@ void test_sort_emptyInput(){
 }
 
 void test_kwic(){
-	std::istringstream input{"lol. haha3"};
+	std::istringstream input{"lol. haha3 wef 2! ! ! ! ! !3"};
 	std::ostringstream out{};
 	kwic(input, out);
-	ASSERT_EQUAL(std::string{"lol, haha\nlol, haha"}, out.str());
+	ASSERT_EQUAL(std::string{"haha\nlol\nwef\n"
+							"lol\nwef\nhaha\n"
+							"wef\nhaha\nlol\n"}, out.str());
 }
 
 void runAllTests(int argc, char const *argv[]){
@@ -110,7 +107,7 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(test_read));
 	s.push_back(CUTE(test_read_emptyInput));
 	s.push_back(CUTE(test_write));
-	s.push_back(CUTE(test_write_emptyOutput));
+	s.push_back(CUTE(test_errorConstruction));
 	s.push_back(CUTE(test_kwic));
 
 	s.push_back(CUTE(test_sort));
