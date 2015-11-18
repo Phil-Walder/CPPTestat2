@@ -20,6 +20,7 @@ void test_stream_input() {
 	}
 	ASSERT_EQUAL(std::string{"compl, tely, weird, matted, in, put, "}, out.str());
 }
+
 void test_2timesInput(){
 	std::istringstream input{"compl"};
 	Word word{};
@@ -31,6 +32,7 @@ void test_2timesInput(){
 	}
 	ASSERT_EQUAL(std::string{",compl"}, out.str());
 }
+
 void test_read(){
 	std::istringstream input{"lala 5ack 4b!\nlala 5ack 4b!"};
 	std::vector<std::vector<Word>> output{};
@@ -41,6 +43,7 @@ void test_read(){
 	output=read(input);
 	ASSERT_EQUAL(expected, output);
 }
+
 void test_read_emptyInput(){
 	std::istringstream input{""};
 	std::vector<std::vector<Word>> output{};
@@ -48,6 +51,7 @@ void test_read_emptyInput(){
 	output=read(input);
 	ASSERT_EQUAL(expected, output);
 }
+
 void test_write(){
 	Word autpot{"autpot"};
 	Word la{"la"};
@@ -61,6 +65,7 @@ void test_write(){
 							 "la\n"
 							 "ack\n"}, out.str());
 }
+
 void test_write_emptyOutput(){
 	Word noInput{""};
 	Word whitespace{" "};
@@ -69,6 +74,7 @@ void test_write_emptyOutput(){
 	write(input, out);
 	ASSERT_EQUAL(std::string{}, out.str());
 }
+
 void test_sort(){
 	Word a{"a"};
 	Word b{"b"};
@@ -88,6 +94,7 @@ void test_sort_emptyInput(){
 	output=sort(input);
 	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output);
 }
+
 void test_kwic(){
 	std::istringstream input{"lol. haha3"};
 	std::ostringstream out{};

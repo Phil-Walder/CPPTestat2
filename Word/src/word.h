@@ -12,7 +12,14 @@ class Word{
 public:
 	std::string lowerWord() const;
 
-	Word(std::string word):word{word}{};
+	Word(std::string input){
+		if(std::find_if(input.begin(), input.end(),
+                [](char c) { return !std::isalpha(c); }) != input.end()){
+			throw std::invalid_argument{"constructor called with non-alpha characters"};
+		}
+		word = input;
+	}
+
 	Word (){};
 
 	inline bool operator<(Word const& rhs) const {
