@@ -9,6 +9,7 @@
 #include <iostream>
 
 int main(){
+	std::cout << "Type 'break' in a new line to terminate input:\n";
 	kwic(std::cin, std::cout);
 }
 

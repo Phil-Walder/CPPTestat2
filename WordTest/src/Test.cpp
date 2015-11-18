@@ -59,11 +59,11 @@ void test_write(){
 	std::vector<std::vector<Word>> input{{autpot, la},{ack}};
 	std::ostringstream out{};
 	write(input, out);
-	ASSERT_EQUAL(std::string{"autpot\n"
-							 "la\n"
-							 "la\n"
-							 "autpot\n"
-							 "ack\n"}, out.str());
+	ASSERT_EQUAL(std::string{"autpot "
+							 "la \n"
+							 "la "
+							 "autpot \n"
+							 "ack \n"}, out.str());
 }
 
 void test_errorConstruction(){
@@ -94,9 +94,9 @@ void test_kwic(){
 	std::istringstream input{"lol. haha3 wef 2! ! ! ! ! !3"};
 	std::ostringstream out{};
 	kwic(input, out);
-	ASSERT_EQUAL(std::string{"haha\nlol\nwef\n"
-							"lol\nwef\nhaha\n"
-							"wef\nhaha\nlol\n"}, out.str());
+	ASSERT_EQUAL(std::string{"haha lol wef \n"
+							"lol wef haha \n"
+							"wef haha lol \n"}, out.str());
 }
 
 void runAllTests(int argc, char const *argv[]){
