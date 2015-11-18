@@ -18,11 +18,11 @@ public:
 	inline bool operator<(Word const& rhs) const {
 		return lowerWord() < rhs.lowerWord();
 	};
-	inline bool operator>(Word const& rhs){ return (rhs < *this); }
-	inline bool operator>=(Word const& rhs){ return !(*this < rhs); }
-	inline bool operator<=(Word const& rhs){ return !(rhs < *this); }
-	inline bool operator==(Word const& rhs){ return !(*this < rhs) && !(rhs < *this); }
-	inline bool operator!=(Word const& rhs){ return !(*this == rhs); }
+	inline bool operator>(Word const& rhs) const { return (rhs < *this); }
+	inline bool operator>=(Word const& rhs) const { return !(*this < rhs); }
+	inline bool operator<=(Word const& rhs) const { return !(rhs < *this); }
+	inline bool operator==(Word const& rhs) const { return !(*this < rhs) && !(rhs < *this); }
+	inline bool operator!=(Word const& rhs) const { return !(*this == rhs); }
 
 	std::ostream& print(std::ostream &out) const;
 	std::istream& read(std::istream &in);

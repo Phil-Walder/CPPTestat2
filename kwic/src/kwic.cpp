@@ -16,18 +16,18 @@
 std::vector<std::vector<Word>> read (std::istream &in){
 	std::vector<std::vector<Word>> linesOfWords;
 
-		std::string line{};
-		int count = 0;
-		while(std::getline(in, line, '\n')){
-			std::istringstream str{line};
-			while(str.good()){
-				Word word{};
-				str>>word;
-				linesOfWords[count].push_back(word);
-			}
-			count++;
+	std::string line{};
+	while(std::getline(in, line, '\n')){
+		std::vector<Word> wordLine{};
+		std::istringstream str{line};
+		while(str.good()){
+			Word word{};
+			str>>word;
+			wordLine.push_back(word);
 		}
-		return linesOfWords;
+		linesOfWords.push_back(wordLine);
+	}
+	return linesOfWords;
 }
 
 void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
@@ -44,6 +44,5 @@ void kwic(std::istream &in, std::ostream &out){
 	std::vector<std::vector<Word>> linesOfWords{};
 
 	linesOfWords=read(in);
-
 	write(linesOfWords, out);
 }
