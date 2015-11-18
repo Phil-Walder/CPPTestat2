@@ -37,7 +37,7 @@ void test_read(){
 	Word lala{"lala"};
 	Word ack{"ack"};
 	Word b{"b"};
-	std::vector<std::vector<Word>> expected{{lala, ack, b},{lala, ack, b}};
+	std::vector<std::vector<Word>> expected{{lala, ack, b, },{lala, ack, b}};
 	output=read(input);
 	ASSERT_EQUAL(expected, output);
 }
