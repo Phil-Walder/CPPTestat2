@@ -45,8 +45,8 @@ void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
 	std::ostream_iterator<Word> const output(out, "\n");
 
 	for_each(begin(linesOfWords), end(linesOfWords), [&](std::vector<Word> line){
-		for(unsigned int i=0;i<line.size();i++){
-			std::rotate_copy(line.begin(),line.begin()+1,line.end(),output);
+		for(unsigned int i=1;i<line.size();i++){
+			std::rotate_copy(line.begin(),line.begin()+i,line.end(),output);
 		}
 	});
 }
