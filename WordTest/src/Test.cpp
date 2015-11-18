@@ -55,7 +55,11 @@ void test_write(){
 	std::vector<std::vector<Word>> input{{autpot, la},{ack}};
 	std::ostringstream out{};
 	write(input, out);
-	ASSERT_EQUAL(std::string{"autpot, la, ack"}, out.str());
+	ASSERT_EQUAL(std::string{"la\n"
+							 "autpot\n"
+							 "autpot\n"
+							 "la\n"
+							 "ack\n"}, out.str());
 }
 void test_write_emptyOutput(){
 	Word noInput{""};
