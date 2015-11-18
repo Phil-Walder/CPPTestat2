@@ -29,7 +29,7 @@ void test_2timesInput(){
 		input >> word;
 		out << "," << word;
 	}
-	ASSERT_EQUAL(std::string{"compl, "}, out.str());
+	ASSERT_EQUAL(std::string{",compl"}, out.str());
 }
 void test_read(){
 	std::istringstream input{"lala 5ack 4b!\nlala 5ack 4b!"};
@@ -44,7 +44,7 @@ void test_read(){
 void test_read_emptyInput(){
 	std::istringstream input{""};
 	std::vector<std::vector<Word>> output{};
-	std::vector<std::vector<Word>> expected{{}};
+	std::vector<std::vector<Word>> expected{};
 	output=read(input);
 	ASSERT_EQUAL(expected, output);
 }
@@ -69,16 +69,20 @@ void test_sort(){
 	Word a{"a"};
 	Word b{"b"};
 	Word c{"c"};
-	std::vector<std::vector<Word>> input {{b, c},{a}};
+	Word f{"f"};
+	std::vector<std::vector<Word>> input {{f, b, c},{a}};
 	std::vector<std::vector<Word>> output {};
-	output=sort(input);
-	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output});
+	output = sort(input);
+	std::vector<std::vector<Word>> expected{{b, c, f}, {a}};
+
+	ASSERT_EQUAL(expected, output);
 }
+
 void test_sort_emptyInput(){
 	std::vector<std::vector<Word>> input {};
 	std::vector<std::vector<Word>> output {};
 	output=sort(input);
-	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output});
+	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output);
 }
 void test_kwic(){
 	std::istringstream input{"lol. haha3"};
@@ -97,6 +101,9 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(test_write));
 	s.push_back(CUTE(test_write_emptyOutput));
 	s.push_back(CUTE(test_kwic));
+
+	s.push_back(CUTE(test_sort));
+	s.push_back(CUTE(test_sort_emptyInput));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);

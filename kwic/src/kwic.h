@@ -11,6 +11,10 @@
 #include <iosfwd>
 #include <vector>
 
+std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted);
+void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out);
+std::vector<std::vector<Word>> read (std::istream &in);
+
 
 void kwic(std::istream &in, std::ostream &out);
 
