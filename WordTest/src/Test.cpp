@@ -74,10 +74,10 @@ void test_sort(){
 	Word b{"b"};
 	Word c{"c"};
 	Word f{"f"};
-	std::vector<std::vector<Word>> input {{f, b, c},{a}};
+	std::vector<std::vector<Word>> input {{f, b, c},{c, a}};
 	std::vector<std::vector<Word>> output {};
 	output = sort(input);
-	std::vector<std::vector<Word>> expected{{b, c, f}, {a}};
+	std::vector<std::vector<Word>> expected{{b, c, f}, {a, c}};
 
 	ASSERT_EQUAL(expected, output);
 }
@@ -92,7 +92,7 @@ void test_kwic(){
 	std::istringstream input{"lol. haha3"};
 	std::ostringstream out{};
 	kwic(input, out);
-	ASSERT_EQUAL(std::string{"lol, haha"}, out.str());
+	ASSERT_EQUAL(std::string{"lol, haha\nlol, haha"}, out.str());
 }
 
 void runAllTests(int argc, char const *argv[]){
