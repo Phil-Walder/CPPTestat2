@@ -30,6 +30,16 @@ std::vector<std::vector<Word>> read (std::istream &in){
 	return linesOfWords;
 }
 
+std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted){
+	for_each(unsorted.begin(), unsorted.end(), [&] (std::vector<Word> line)){
+		sort_words(line);
+	}
+}
+bool sort_words(std::vector<Word> toCompare){
+	for(toCompare.begin(), toCompare.end()){
+		toCompare
+	}
+}
 void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
 	std::ostream_iterator<Word> const output(out, "\n");
 
@@ -42,7 +52,11 @@ void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
 
 void kwic(std::istream &in, std::ostream &out){
 	std::vector<std::vector<Word>> linesOfWords{};
+	std::vector<std::vector<Word>> sortedWords{};
 
 	linesOfWords=read(in);
-	write(linesOfWords, out);
+
+	sortedWords=sort(linesOfWords);
+
+	write(sortedWords, out);
 }

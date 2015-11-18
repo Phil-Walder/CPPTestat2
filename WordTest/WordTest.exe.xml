@@ -1,0 +1,30 @@
+<testsuites>
+	<testsuite name="AllTests" tests="6">
+		<testcase classname="AllTests" name="test_stream_input"/>
+		<testcase classname="AllTests" name="test_read">
+			<failure message="..\src\Test.cpp:38 test_read: expected == output expected:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb},\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb}}	but was:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb,\n},\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb,\nasdf}}	">
+test_read: expected == output expected:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb},\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb}}	but was:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb,\n},\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{\nlala,\nack,\nb,\nasdf}}	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="test_read_emptyInput">
+			<failure message="..\src\Test.cpp:47 test_read_emptyInput: expected == output expected:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{}}	but was:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{}	">
+test_read_emptyInput: expected == output expected:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{\nstd::vector&lt;Word, std::allocator&lt;Word&gt; &gt;{}}	but was:	std::vector&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt;, std::allocator&lt;std::vector&lt;Word, std::allocator&lt;Word&gt; &gt; &gt; &gt;{}	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="test_write">
+			<failure message="..\src\Test.cpp:58 test_write: std::string{&quot;autpot, la, ack&quot;} == out.str() expected:	autpot, la, ack	but was:	la\nautpot\nla\nautpot\nack\n	">
+test_write: std::string{&quot;autpot, la, ack&quot;} == out.str() expected:	autpot, la, ack	but was:	la\nautpot\nla\nautpot\nack\n	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="test_write_emptyOutput">
+			<failure message="..\src\Test.cpp:68 test_write_emptyOutput: std::string{} == out.str() expected:		but was:	\n \n	">
+test_write_emptyOutput: std::string{} == out.str() expected:		but was:	\n \n	
+			</failure>
+		</testcase>
+		<testcase classname="AllTests" name="test_kwic">
+			<failure message="..\src\Test.cpp:76 test_kwic: std::string{&quot;lol, haha&quot;} == out.str() expected:	lol, haha	but was:	haha\n\nlol\nhaha\n\nlol\nhaha\n\nlol\n	">
+test_kwic: std::string{&quot;lol, haha&quot;} == out.str() expected:	lol, haha	but was:	haha\n\nlol\nhaha\n\nlol\nhaha\n\nlol\n	
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

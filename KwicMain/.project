@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>kwic</name>
+	<name>KwicMain</name>
 	<comment></comment>
 	<projects>
+		<project>Word</project>
+		<project>kwic</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
