@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iterator>
+#include <set>
 
 std::vector<std::vector<Word>> read (std::istream &in){
 	std::vector<std::vector<Word>> linesOfWords;
@@ -21,7 +22,9 @@ std::vector<std::vector<Word>> read (std::istream &in){
 	while(std::getline(in, line, '\n')){
 		if(line=="break"){break;}
 
-		std::istream_iterator<Word> initer{line};
+		std::istringstream str{line};
+
+		std::istream_iterator<Word> initer{str};
 		std::istream_iterator<Word> eof{};
 		std::vector<Word> wordLine{initer, eof};
 
@@ -30,7 +33,7 @@ std::vector<std::vector<Word>> read (std::istream &in){
 	return linesOfWords;
 }
 //set / multiset
-std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted) const {
+/*std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted) const {
 	std::vector<std::vector<Word>> sorted{};
 	for_each(unsorted.begin(), unsorted.end(),
 		[&sorted](std::vector<Word> line){
@@ -39,21 +42,29 @@ std::vector<std::vector<Word>> sort (std::vector<std::vector<Word>> unsorted) co
 		}
 	);
 	return sorted;
-}
+}*/
 
 void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out){
 	std::ostream_iterator<Word> const output(out, " ");
 
-	for_each(begin(linesOfWords), end(linesOfWords), [&](std::vector<Word> line){
-		for(unsigned int i=0;i<line.size();i++){
-			std::rotate_copy(line.begin(),line.begin()+i,line.end(),output);
-			out << "\n";
-		}
-	});
+	std::multiset<std::vector<Word>> lines (linesOfWords.begin(), linesOfWords.end());
+	int counter = 0;
+	while(true){
+		bool didOutput = false;
+		std::for_each(lines.begin(), lines.end(), [&](std::vector<Word> line){
+			if(line.size()<=counter){
+				didOutput=true;
+				std::rotate_copy(line.begin(),line.begin()+counter,line.end(),output);
+				out << "\n";
+			}
+		});
+		if(!didOutput)break;
+		counter++;
+	}
 }
 
 void kwic(std::istream &in, std::ostream &out){
 	std::vector<std::vector<Word>> linesOfWords{};
 	linesOfWords = read(in);
-	write(sort(linesOfWords), out);
+	write(linesOfWords, out);
 }
