@@ -59,44 +59,25 @@ void test_write(){
 	std::vector<std::vector<Word>> input{{autpot, la},{ack}};
 	std::ostringstream out{};
 	write(input, out);
-	ASSERT_EQUAL(std::string{"autpot "
+	ASSERT_EQUAL(std::string{"ack \n"
+							"autpot "
 							 "la \n"
 							 "la "
 							 "autpot \n"
-							 "ack \n"}, out.str());
+								}, out.str());
 }
 
 void test_errorConstruction(){
 	ASSERT_THROWS(Word whitespace{" "}, std::invalid_argument);
 }
 
-void test_sort(){
-	Word a{"a"};
-	Word b{"b"};
-	Word c{"c"};
-	Word f{"f"};
-	std::vector<std::vector<Word>> input {{f, b, c},{c, a}};
-	std::vector<std::vector<Word>> output {};
-	output = sort(input);
-	std::vector<std::vector<Word>> expected{{b, c, f}, {a, c}};
-
-	ASSERT_EQUAL(expected, output);
-}
-
-void test_sort_emptyInput(){
-	std::vector<std::vector<Word>> input {};
-	std::vector<std::vector<Word>> output {};
-	output=sort(input);
-	ASSERT_EQUAL(std::vector<std::vector<Word>>{}, output);
-}
-
 void test_kwic(){
 	std::istringstream input{"lol. haha3 wef 2! ! ! ! ! !3"};
 	std::ostringstream out{};
 	kwic(input, out);
-	ASSERT_EQUAL(std::string{"haha lol wef \n"
-							"lol wef haha \n"
-							"wef haha lol \n"}, out.str());
+	ASSERT_EQUAL(std::string{"haha wef lol \n"
+							"lol haha wef \n"
+							"wef lol haha \n"}, out.str());
 }
 
 void runAllTests(int argc, char const *argv[]){
@@ -109,9 +90,6 @@ void runAllTests(int argc, char const *argv[]){
 	s.push_back(CUTE(test_write));
 	s.push_back(CUTE(test_errorConstruction));
 	s.push_back(CUTE(test_kwic));
-
-	s.push_back(CUTE(test_sort));
-	s.push_back(CUTE(test_sort_emptyInput));
 
 	cute::xml_file_opener xmlfile(argc,argv);
 	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);
