@@ -19,7 +19,7 @@ std::vector<std::vector<Word>> read(std::istream &in) {
 
 	std::string line { };
 	while (std::getline(in, line, '\n')) {
-		std::istringstream lineStream{line};
+		std::istringstream lineStream { line };
 		std::istream_iterator<Word> initer { lineStream };
 		std::istream_iterator<Word> eof { };
 		std::vector<Word> wordLine { initer, eof };
@@ -28,20 +28,23 @@ std::vector<std::vector<Word>> read(std::istream &in) {
 	return linesOfWords;
 }
 
-void write(std::vector<std::vector<Word>> lines, std::ostream &out) {
-	std::ostream_iterator<Word> const output(out, " ");
-
-	std::vector<std::vector<Word>> rotations { };
-	for_each(begin(lines), end(lines), [&rotations](std::vector<Word> const line) {
+const std::set<std::vector<Word>> rotate(std::vector<std::vector<Word>> lines) {
+	std::vector<std::vector<Word>> rotatedLines { };
+	for_each(begin(lines), end(lines), [&rotatedLines](std::vector<Word> const line) {
 		for(unsigned int i = 0; i < line.size(); i++) {
 			std::vector<Word> rotationLine {};
 			std::rotate_copy(
 					begin(line), begin(line) + i,
 					end(line), back_inserter(rotationLine));
-			rotations.push_back(rotationLine);
+			rotatedLines.push_back(rotationLine);
 		}
 	});
-	std::set<std::vector<Word>> const sortedLines { rotations.begin(), rotations.end() };
+	std::set<std::vector<Word>> const sortedLines { rotatedLines.begin(), rotatedLines.end() };
+	return sortedLines;
+}
+
+void write(std::set<std::vector<Word>> const sortedLines, std::ostream &out) {
+	std::ostream_iterator<Word> const output(out, " ");
 
 	for_each(sortedLines.begin(), sortedLines.end(), [&](std::vector<Word> line) {
 		std::copy(line.begin(),line.end(),output);
@@ -52,5 +55,5 @@ void write(std::vector<std::vector<Word>> lines, std::ostream &out) {
 void kwic(std::istream &in, std::ostream &out) {
 	std::vector<std::vector<Word>> linesOfWords { };
 	linesOfWords = read(in);
-	write(linesOfWords, out);
+	write(rotate(linesOfWords), out);
 }

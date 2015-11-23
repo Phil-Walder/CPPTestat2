@@ -10,9 +10,12 @@
 #include "src/word.h"
 #include <iosfwd>
 #include <vector>
+#include <set>
 
-void write(std::vector<std::vector<Word>> linesOfWords, std::ostream &out);
 std::vector<std::vector<Word>> read (std::istream &in);
+const std::set<std::vector<Word>> rotate(std::vector<std::vector<Word>> lines);
+void write(std::set<std::vector<Word>> const linesOfWords, std::ostream &out);
+
 
 void kwic(std::istream &in, std::ostream &out);
 
