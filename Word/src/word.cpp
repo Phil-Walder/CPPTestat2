@@ -16,8 +16,12 @@ std::ostream& Word::print(std::ostream &out) const {
 }
 
 std::istream& Word::read(std::istream &in) {
+	if(in.eof()){
+		in.clear(std::ios_base::failbit);
+		return in;
+	}
 	std::string tempWord;
-	while (in.good()) {
+	while (!in.eof()) {
 		char peek = in.peek();
 		if (!std::isalpha(peek)) {
 			if(!(tempWord == "")){
